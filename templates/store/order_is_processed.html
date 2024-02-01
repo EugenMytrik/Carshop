@@ -1,0 +1,18 @@
+<style>
+    div {
+        background: #DAE1F5;
+        border-radius: 20px;
+        padding-left: 38px;
+        padding-bottom: 20px;
+        margin: 30px;
+    }
+</style>
+<form method="GET">
+    {% csrf_token %}
+    <div>
+        <h3> Order № {{  order_id  }}</h3>
+        <h1>Success!</h1>
+        <p>Order is completed. Await the call from support service </p>
+    </div>
+    <input class="input_button" type="submit" name="index_page" value="Main page">
+</form>

@@ -1,0 +1,60 @@
+<style>
+    .title {
+        text-align: center;
+        margin: 35px;
+    }
+    h3 {
+        text-align: right;
+    }
+    .textcols {
+        background: gainsboro;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        border-radius: 20px;
+    }
+    .column {
+        background: peachpuff;
+        white-space: normal;
+        width: 50%;
+        flex-direction: column;
+        flex-basis: 100%;
+        vertical-align: top;
+        border-radius: 20px;
+        flex: 0 0 calc(25% - 5px);
+        padding-left: 38px;
+        margin: 25px;
+    }
+    </style>
+    
+    <div class="title">
+          
+        
+    <h1>List of the cars</h1>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="textcols">
+        {% if all_cars %}
+            {%  for el in all_cars  %}
+                <div class="column">
+                    
+                    <p>{{  el.car_type.brand  }}  <h2>{{  el.car_type  }} colour: <span style="background: {{  el.color  }};
+                        color: {{ el.color }};">......</span>  </h2></p>
+    
+                    <p>Price: ${{  el.car_type.price  }}</p>
+                    <p></p>
+                    {%  if el in blocked_cars  %}
+                        <label>Select<input class="input_button" type="submit" name='select' value='{{  el.id  }}' disabled></label>
+                    {%  else  %}
+                        <label>Select<input class="input_button" type="submit" name='select' value='{{  el.id  }}'></label>
+                    {%  endif  %}
+                 </div>
+            {%  endfor  %}
+        {% else %}
+            No cars
+        {%  endif  %}
+        </div>
+        <input class="input_button" type="submit" value="Make order">
+    </form>
